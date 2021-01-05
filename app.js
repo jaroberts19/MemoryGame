@@ -1,4 +1,4 @@
-//declaring important global variables
+//declares important global variables
 let gameStarted = false;
 let cardCount = 0;
 let moveCount = 0;
@@ -6,7 +6,7 @@ let correctMatches = 0;
 let firstCard;
 let secondCard;
 
-//array of the donut images
+//stores the donut images in an array
 const donuts = [
    {
       name: 'blue', 
@@ -34,12 +34,13 @@ const donuts = [
    }
 ]
 
-//creating the card class
+//creates the card class
 class Card {
    constructor(selector, img){
       this.selector = document.querySelector(selector);
       this.img = img;
    }
+   //reveals the assigned donut image when the user clicks on a card
    revealCard(){
       if(!this.selector.classList.contains('card-active') && cardCount === 0) {
          this.selector.classList.add('card-active');
@@ -58,12 +59,12 @@ class Card {
    }
 }
 
-//assigning the buttons to variables
+//assigns the buttons to variables
 const start = document.querySelector('.start');
 const reset = document.querySelector('.reset');
 const moves = document.querySelector('.moves')
 
-//creating the card objects
+//creates the card objects
 const card1 = new Card('.card1', undefined); 
 const card2 = new Card('.card2', undefined); 
 const card3 = new Card('.card3', undefined); 
@@ -140,8 +141,9 @@ const findMatch = () => {
    }
 }
 
-//checks that the game has started and if so activates the card functions
-//time out was added to allow time to show both cards and their transitions
+//is activated when the user clicks on a card; the onclick was added to the HTML
+//the function checks that the game has started and if so activates the card functions
+//the time out was added to allow time to show both cards and their transitions
 const activeCard = (card) => {
    if(gameStarted){
       card.revealCard();
@@ -151,7 +153,7 @@ const activeCard = (card) => {
    } 
 }
 
-//sends the user a message after they finish and closes the board
+//sends the user a message after they finish and then  closes the board
 const youWin = () => {
    if(correctMatches === 6){
       alert('Congratulations you finished! Press "Start Game" to play again!');
