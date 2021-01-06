@@ -78,28 +78,23 @@ const card10 = new Card('.card10', undefined);
 const card11 = new Card('.card11', undefined); 
 const card12 = new Card('.card12', undefined); 
 
-//turning them into an array
-const cardArray1 = [card1, card3, card5, card7, card9, card11];
-const cardArray2 = [card2, card4, card6, card8, card10, card12];
+//stores them into different variables
 const cards = document.querySelectorAll('.card');
 const cardArrayAll = [card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12];
+const doubleDonuts = donuts.concat(donuts);
 
-//shuffles the donut images
-const shuffle = (arr) => {
-  let i = arr.length, j, temp;
+//shuffles the donut images and assigns them each to a card
+const shuffle = (donutArr, cardArr) => {
+  let i = donutArr.length, j, temp;
   while(--i > 0) {
     j = Math.floor(Math.random() * (i+1));
-    temp = arr[j];
-    arr[j] = arr[i];
-    arr[i] = temp; 
+    temp = donutArr[j];
+    donutArr[j] = donutArr[i];
+    donutArr[i] = temp; 
   }
+  for (let l = 0; l < cardArr.length; l++){
+   cardArr[l].img = donutArr[l].img;
 }
-
-//assigns them to each card 
-const assignCard = (cardArr, donutArr) => {
-   for (let i = 0; i < cardArr.length; i++){
-      cardArr[i].img = donutArr[i].img;
-   }
 }
 
 //allows the user to start the game
@@ -179,10 +174,7 @@ const closeBoard = () => {
 //starts the game and activates the random card assignments
 start.addEventListener('click', () => {
    if (!gameStarted){
-      shuffle(donuts);
-      assignCard(cardArray1, donuts);
-      shuffle(donuts);
-      assignCard(cardArray2, donuts);
+      shuffle(doubleDonuts, cardArrayAll);
       revealBoard();
       gameStarted = true;
    } 
